@@ -1,0 +1,6 @@
+### Start a Chunk to read the CSV file, change it to an SQL insert statement, and write the SQL insert statement to a file.
+# curl -i -X POST http://localhost:8080/restapi/batch-jobs/batchletEdmontonPropertyAssessmentData
+POST {{server}}/restapi/batch-jobs/chunkEdmontonPropertyAssessmentData
+
+### Get the status of batch job 1
+GET {{server}}/restapi/batch-jobs/1

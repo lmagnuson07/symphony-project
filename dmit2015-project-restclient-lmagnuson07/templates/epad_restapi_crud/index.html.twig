@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EdmontonPropertyAssessmentData index{% endblock %}
+
+{% block body %}
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            <div class="container">
+                <h3>{{ message }}</h3>
+            </div>
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            <div class="container">
+                <h3>{{ message }}</h3>
+            </div>
+        </div>
+    {% endfor %}
+
+    <section class="container">
+        <h1>EdmontonPropertyAssessmentData index</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>AccountNumber</th>
+                <th>Suite</th>
+                <th>HouseNumber</th>
+                <th>StreetName</th>
+                <th>AssessedValue</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for epad in epadList %}
+                <tr>
+                    <td>{{ epad.accountNumber }}</td>
+                    <td>{{ epad.suite }}</td>
+                    <td>{{ epad.houseNumber }}</td>
+                    <td>{{ epad.streetName }}</td>
+                    <td>{{ epad.assessedValue }}</td>
+                    <td>
+                        <a href="{{ path('app_admin_epad.show', {'id': epad.accountNumber}) }}">show</a>
+                        <a href="{{ path('app_admin_epad.edit', {'id': epad.accountNumber}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="14">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <span class="first"><a href="{{ path('app_admin_epad.list', {'start': 0}) }}"><< First</a></span>
+                    <span class="prev"><a href="{{ path('app_admin_epad.list', {'start': pageIndex - 1}) }}">< Prev</a></span>
+                    {% set x = 4 %}
+                    {% set y = 0 %}
+                    {% set n = 0 %}
+                    {% set current = false %}
+
+                    {% for i in 0..9 %}
+                        {% set num = 0 %}
+
+                        {# End of the pagination #}
+                        {% if pageIndex >= lastIndex - 7 %}
+                            {% set num = lastIndex - 9 + i %}{# needs to stay at 9 or it will print to many. #}
+                            {% if num == pageIndex %}
+                                {% set current = true %}
+                            {% else %}
+                                {% set current = false %}
+                            {% endif %}
+
+                        {# The middle of the pagination #}
+                        {% elseif pageIndex >= 5 %}
+
+                            {% if x > 0 %}
+                                {% set num = pageIndex - x %}
+                                {% set x = x - 1 %}
+                                {% set current = false %}
+                            {% elseif x == 0 %}
+                                {% set x = x - 1 %}
+                                {% set num = pageIndex %}
+                                {% set current = true %}
+                            {% else %}
+                                {% set y = y + 1 %}
+                                {% set num = pageIndex + y %}
+                                {% set current = false %}
+                            {% endif %}
+
+                        {# Beginning of the pagination #}
+                        {% else %}
+                            {% if i == pageIndex %}
+                                {% set current = true %}
+                            {% else %}
+                                {% set current = false %}
+                            {% endif %}
+                            {% set num = i %}
+                        {% endif %}
+
+                        {% set label = num + 1 %}
+                        <span><a style="{{ current ? "color:red;" : '' }}" href="{{ path('app_admin_epad.list', {'start': num}) }}">{{ label }}</a></span>
+                    {% endfor %}
+                    <span class="first"><a href="{{ path('app_admin_epad.list', {'start': pageIndex + 1}) }}">Next ></a></span>
+                    <span class="prev"><a href="{{ path('app_admin_epad.list', {'start': lastIndex}) }}">Last >></a></span>
+                </tr>
+            </tfoot>
+        </table>
+
+        <a href="{{ path('app_admin_epad.new') }}">Create new</a>
+    </section>
+
+{% endblock %}

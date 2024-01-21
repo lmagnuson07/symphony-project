@@ -1,0 +1,79 @@
+### Register
+POST https://127.0.0.1:8080/restapi/register
+Content-Type: application/json
+
+{
+  "email": "user2@email.com",
+  "username": "user2",
+  "password": "pw"
+}
+
+### For login and getting the bearer token
+POST https://127.0.0.1:8080/restapi/login_check
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "password": "pw"
+}
+
+### Fetch all epad's
+GET https://127.0.0.1:8080/restapi/admin/epad
+Authorization: Bearer {{jwtToken}}
+
+### For login and getting the bearer token
+POST https://127.0.0.1:8080/restapi/admin/epad/new
+Content-Type: application/json
+Authorization: Bearer {{jwtToken}}
+
+{
+  "accountNumber": "1acv31",
+  "houseNumber": "42412",
+  "streetName": "Nsers",
+  "suite": "sdfs",
+  "assessedValue": "2434",
+  "longitude": "34.43",
+  "latitude": "345.35",
+  "neighbourhood": "asdfa",
+  "neighbourhoodId": "1234",
+  "garage": "true",
+  "ward": "23",
+  "assessmentClass1": "sfasd"
+}
+
+### Fetch one epad
+GET https://127.0.0.1:8080/restapi/admin/epad/1acv31
+Authorization: Bearer {{expiredJwtToken}}
+
+### Update one epad
+PUT https://127.0.0.1:8080/restapi/admin/epad/12341/edit
+Content-Type: application/json
+Authorization: Bearer {{jwtToken}}
+
+{
+  "houseNumber": "1234",
+  "streetName": "Update",
+  "suite": "Update",
+  "assessedValue": "2434",
+  "longitude": "34.43",
+  "latitude": "345.35",
+  "neighbourhood": "Update",
+  "neighbourhoodId": "1234",
+  "garage": "false",
+  "ward": "41",
+  "assessmentClass1": "Update"
+}
+
+### Delete one epad
+DELETE https://127.0.0.1:8080/restapi/admin/epad/123s1/delete
+Authorization: Bearer {{jwtToken}}
+
+### Start Import
+POST https://127.0.0.1:8080/restapi/admin/epad/import
+Content-Type: application/json
+Authorization: Bearer {{jwtToken}}
+
+{
+  "importNumber": 8,
+  "batchSize": 5
+}

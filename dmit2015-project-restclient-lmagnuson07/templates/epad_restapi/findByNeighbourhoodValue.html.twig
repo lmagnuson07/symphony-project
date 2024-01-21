@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EpadRestApiController!{% endblock %}
+
+{% block body %}
+
+    <section class="container">
+        <h1>EdmontonPropertyAssessmentData index</h1>
+
+        {{ form(queryForm) }}
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>AccountNumber</th>
+                <th>Suite</th>
+                <th>HouseNumber</th>
+                <th>StreetName</th>
+{#                <th>Garage</th>#}
+{#                <th>NeighbourhoodId</th>#}
+{#                <th>Neighbourhood</th>#}
+{#                <th>Ward</th>#}
+                <th>AssessedValue</th>
+{#                <th>Latitude</th>#}
+{#                <th>Longitude</th>#}
+{#                <th>AssessmentClass1</th>#}
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if edmontonProperties is not empty %}
+                {% for ep in edmontonProperties %}
+                    <tr>
+                        <td>{{ ep.accountNumber }}</td>
+                        <td>{{ ep.suite }}</td>
+                        <td>{{ ep.houseNumber }}</td>
+                        <td>{{ ep.streetName }}</td>
+    {#                    <td>{{ ep.garage ? 'Yes' : 'No' }}</td>#}
+    {#                    <td>{{ ep.neighbourhoodId }}</td>#}
+    {#                    <td>{{ ep.neighbourhood }}</td>#}
+    {#                    <td>{{ ep.ward }}</td>#}
+                        <td>{{ ep.assessedValue }}</td>
+    {#                    <td>{{ ep.latitude }}</td>#}
+    {#                    <td>{{ ep.longitude }}</td>#}
+    {#                    <td>{{ ep.assessmentClass1 }}</td>#}
+                        <td>
+                            <a href="{{ path('app_epad.show', {'id': ep.accountNumber}) }}">show</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="14">no records found</td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+
+    </section>
+
+{% endblock %}

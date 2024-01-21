@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EdmontonPropertyAssessmentData{% endblock %}
+
+{% block body %}
+
+    <section class="container">
+
+        <h1>EdmontonPropertyAssessmentData</h1>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>AccountNumber</th>
+                    <td>{{ epad.accountNumber }}</td>
+                </tr>
+                <tr>
+                    <th>Suite</th>
+                    <td>{{ epad.suite }}</td>
+                </tr>
+                <tr>
+                    <th>HouseNumber</th>
+                    <td>{{ epad.houseNumber }}</td>
+                </tr>
+                <tr>
+                    <th>StreetName</th>
+                    <td>{{ epad.streetName }}</td>
+                </tr>
+                <tr>
+                    <th>Garage</th>
+                    <td>{{ epad.garage ? 'Yes' : 'No' }}</td>
+                </tr>
+                <tr>
+                    <th>NeighbourhoodId</th>
+                    <td>{{ epad.neighbourhoodId }}</td>
+                </tr>
+                <tr>
+                    <th>Neighbourhood</th>
+                    <td>{{ epad.neighbourhood }}</td>
+                </tr>
+                <tr>
+                    <th>Ward</th>
+                    <td>{{ epad.ward }}</td>
+                </tr>
+                <tr>
+                    <th>AssessedValue</th>
+                    <td>{{ epad.assessedValue }}</td>
+                </tr>
+                <tr>
+                    <th>Latitude</th>
+                    <td>{{ epad.latitude }}</td>
+                </tr>
+                <tr>
+                    <th>Longitude</th>
+                    <td>{{ epad.longitude }}</td>
+                </tr>
+                <tr>
+                    <th>AssessmentClass1</th>
+                    <td>{{ epad.assessmentClass1 }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ app.request.headers.get('referer') }}">back to list</a>
+
+    </section>
+
+{% endblock %}

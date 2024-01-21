@@ -1,0 +1,14 @@
+### Get the EdmontonPropertyAssessment by byHouseNumberAndStreetNameAndSuite
+GET {{server}}/restapi/EdmontonPropertyAssessmentDatas/query/byHouseNumberAndStreetNameAndSuite?houseNumber=8846&streetName=152B AVENUE NW&suite=
+
+### Get the EdmontonPropertyAssessment by longitude -113.35023446875456, latitude 53.47287377003312, distance 50
+GET {{server}}/restapi/EdmontonPropertyAssessmentDatas/query/within?longitude=-113.35023446875456&latitude=53.47287377003312&distance=50
+
+### Get the EdmontonPropertyAssessment by byNeighbourhoodAndAssessedValueRange
+GET {{server}}/restapi/EdmontonPropertyAssessmentDatas/query/byNeighbourhoodAndAssessedValueRange?neighbourhood=RUTHERFORD&minValue=435000&maxValue=436000
+
+### Get the count
+GET {{server}}/restapi/EdmontonPropertyAssessmentDatas/count
+
+### Get one record by ID
+GET {{server}}/restapi/EdmontonPropertyAssessmentDatas/1223205

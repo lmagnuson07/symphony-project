@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EpadRestApiController!{% endblock %}
+
+{% block body %}
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            <div class="container">
+                <h3>{{ message }}</h3>
+            </div>
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            <div class="container">
+                <h3>{{ message }}</h3>
+            </div>
+        </div>
+    {% endfor %}
+
+    <section class="container">
+        <h1>Batch index</h1>
+
+        <p>Press this button to start the batch import process</p>
+
+        <div id="imageContainer"></div>
+
+        <div id="ajaxMsgHolder"></div>
+
+        <form method="post">
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('batchImportToken') }}"
+            >
+            <button id="batchImportButton" class="btn">Start Import</button>
+        </form>
+    </section>
+
+{% endblock %}
+
+{% block footer_js %}
+    <script>
+        console.log('<img src=\"{{ asset('img/Loading_icon.gif') }}\" alt="loading" />');
+        $('#batchImportButton').click(function(e) {
+            e.preventDefault();
+            console.log($('input[name="_csrf_token"]').val());
+            let token =  $('input[name="_csrf_token"]').val();
+            $.ajax({
+                "method": "POST",
+                "url": "https://127.0.0.1:8000/epad/batch",
+                "timeout": 0,
+                data: JSON.stringify({
+                    crsfToken: token
+                }),
+                beforeSend: function(jqXHR, settings) {
+                    if (!$('img.loading-icon').length) {
+                        $('#imageContainer').append('<img class=\"loading-icon\" src=\"{{ asset('img/Loading_icon.gif') }}\" alt="loading" />');
+                    }
+                    $('#batchImportButton').hide();
+                },
+                success: function (data, textStatus, jqXHR) {
+                    console.log(data)
+                    if (data.complete) {
+                        $('img.loading-icon').remove();
+                        $('#ajaxMsgHolder').replaceWith("<div id=\"ajaxMsgHolder\"><p>Successfully Imported all data!!!</p></p></div>");
+                        $('#batchImportButton').show();
+                    } else {
+                        if (data.success) {
+                            $('#batchImportButton').click();
+                        }
+                        $('#ajaxMsgHolder').replaceWith("<div id=\"ajaxMsgHolder\"><p>" + data.ajaxMsg + "</p></div>");
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    $('#batchImportButton').show();
+                }
+            });
+        });
+    </script>
+{% endblock %}

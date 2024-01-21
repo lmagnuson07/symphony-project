@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New EdmontonPropertyAssessmentData{% endblock %}
+
+{% block body %}
+
+    <section class="container">
+
+        <h1>Create new EdmontonPropertyAssessmentData</h1>
+
+        {{ include('epad_restapi_crud/_form.html.twig') }}
+
+        <a href="{{ path('app_admin_epad.list') }}">back to list</a>
+
+    </section>
+
+{% endblock %}

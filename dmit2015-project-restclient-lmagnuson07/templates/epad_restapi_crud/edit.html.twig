@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit EdmontonPropertyAssessmentData{% endblock %}
+
+{% block body %}
+
+    <section class="container">
+
+        <h1>Edit EdmontonPropertyAssessmentData</h1>
+
+        {{ include('epad_restapi_crud/_form.html.twig', {'button_label': 'Update'}) }}
+
+        <a href="{{ path('app_admin_epad.list') }}">back to list</a>
+
+        {{ include('epad_restapi_crud/_delete_form.html.twig') }}
+    </section>
+
+{% endblock %}

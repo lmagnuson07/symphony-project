@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+$borderBlue: #265d83;
+$offBlack: #4b565e;
+$greyText: #b7bbbe;
+$sliderBlue: #0272b5;
+$white: #ffffff;
+* {
+  box-sizing: border-box;
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono", "Droid Sans Mono", monospace, monospace;
+}
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+
+
+
+
+  /* Scales nicely with transform: scale() */
+  .toggle-lang-icon {
+    .fr-label {
+      color: $greyText !important;
+    }
+    .en-label {
+      color: $white !important;
+    }
+    .slider {
+      left: 48% !important;
+    }
+  }
+  .lang-icon {
+    position: relative;
+    width: 63px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    border: 5px solid $borderBlue;
+    border-radius: 20px;
+    background-color: $offBlack;
+    cursor: pointer;
+    span {
+      position: relative;
+      z-index: 1;
+      margin-top: -1px;
+      font-weight: 600;
+    }
+    .fr-label {
+      color: $white;
+      transition: .5s;
+    }
+    .en-label {
+      color: $greyText;
+      transition: .5s;
+    }
+    .slider {
+      position: absolute;
+      left: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      transition: .5s;
+      background-color: $sliderBlue;
+    }
+  }
+
+
+
+
+
+
+
+
+
+}
+

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <br>
+    <div class="container">
+        <h1>{{ dish.name }}</h1>
+        {% if dish.image is not null and dish.image is not empty %}
+            <img alt="{{ dish.name }} Image" src="{{ asset('images/' ~ dish.image) }}">
+        {% endif %}
+    </div>
+
+{% endblock %}
